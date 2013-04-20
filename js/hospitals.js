@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	loadMaps();
+	travelTime("Brooklyn", "Sunnyside, Queens");
 })
 
 function loadMaps(){
@@ -77,4 +78,15 @@ function loadMaps(){
     	map : map,
     	icon: 'img/red-dot.png'
     })
+}
+
+function travelTime(origin, destination){
+	var url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&sensor=false";
+
+	$.ajax({
+	  url: url
+	}).done(function ( data ) {
+	  seconds = data.routes[0].legs[0].duration.value;
+	  return seconds;
+	});
 }
