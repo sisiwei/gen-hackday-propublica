@@ -9,7 +9,7 @@ var VictimDragger = function(startCoords, map) {
     map : map,
     draggable : true,
     animation: google.maps.Animation.DROP,
-    icon: 'img/red-dot.png'
+    icon: 'img/person-red.png'
   });
   that.createAlert(map, startCoords);
 
@@ -60,7 +60,7 @@ VictimDragger.prototype.createAlert = function(map, pos){
     $('#alert-box').fadeOut(); 
   },1500);
   NEEDSHELP++;
-  $('#needs-help').html(generatePeople(NEEDSHELP));
+  $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
 }
 
 VictimDragger.prototype.dropSuccess = function(name) {

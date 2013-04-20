@@ -3,8 +3,9 @@ var NEEDSHELP = 0;
 $(document).ready(function(){
 	loadMaps();
 	travelTime("Brooklyn", "Sunnyside, Queens");
-	$('#survived').html(generatePeople(2));
-	$('#deceased').html(generatePeople(10));
+	$('#hospitalized').html(generatePeople(40, "red"));
+	$('#survived').html(generatePeople(2, "green"));
+	$('#deceased').html(generatePeople(10, "red"));
 })
 
 function loadMaps(){
@@ -72,7 +73,7 @@ function loadMaps(){
 			 var marker = new google.maps.Marker({
 			  position: new google.maps.LatLng(hospital.lat, hospital.lng),
 			  map: map,
-			  icon: 'img/blue-dot.png'
+			  icon: 'img/hospital.png'
 			});   	
     });
 
@@ -94,10 +95,10 @@ function travelTime(origin, destination){
 	});
 }
 
-function generatePeople(number){
+function generatePeople(number, color){
 	var temp = [];
 	$.each(_.range(number), function(k,v){
-		temp.push('<img class="person" src="img/person-red.png" />');
+		temp.push('<img class="person" src="img/person-' + color + '.png" />');
 	})
 	return temp.join('');
 }
