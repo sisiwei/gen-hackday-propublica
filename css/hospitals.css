@@ -1,7 +1,8 @@
-h2 { margin-bottom: 0px; }
+h2 { margin-bottom: 0px; padding-right: 10px;}
 .float-left { float: left; }
 .clear { clear: both; }
 
+.subhead { margin-top: 30px; display:block; }
 .opening-container {
 	position: relative;
 }
