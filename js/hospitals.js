@@ -74,12 +74,7 @@ function loadMaps(){
 			});   	
     });
 
-    // initial 'victim'
-    var victimMarker = new google.maps.Marker({
-    	position : new google.maps.LatLng(40.706777, -74.012854),
-    	map : map,
-    	icon: 'img/red-dot.png'
-    })
+		var currentVictim = new VictimDragger([40.706777, -74.012854], map)
 }
 
 // Calculate travel times from any origin to destination
