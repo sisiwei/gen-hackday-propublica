@@ -1,3 +1,5 @@
+var NEEDSHELP = 0;
+
 $(document).ready(function(){
 	loadMaps();
 	travelTime("Brooklyn", "Sunnyside, Queens");
@@ -57,7 +59,7 @@ function loadMaps(){
 	    disableDoubleClickZoom: true,
 	    panControl: false,
 	    draggable: false,
-	    center: new google.maps.LatLng(40.7363, -73.9271)
+	    center: new google.maps.LatLng(40.7363, -73.9571)
 	};
 
     var mapType = new google.maps.StyledMapType(PPstyles, PPopts);
@@ -95,7 +97,7 @@ function travelTime(origin, destination){
 function generatePeople(number){
 	var temp = [];
 	$.each(_.range(number), function(k,v){
-		temp.push('<img class="person" src="img/person.png" />');
+		temp.push('<img class="person" src="img/person-red.png" />');
 	})
 	return temp.join('');
 }

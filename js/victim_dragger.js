@@ -59,8 +59,8 @@ VictimDragger.prototype.createAlert = function(map, pos){
   setTimeout(function(){ 
     $('#alert-box').fadeOut(); 
   },1500);
-
-
+  NEEDSHELP++;
+  $('#needs-help').html(generatePeople(NEEDSHELP));
 }
 
 VictimDragger.prototype.dropSuccess = function(name) {

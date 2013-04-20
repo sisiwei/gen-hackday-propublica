@@ -6,6 +6,14 @@ h2 { margin-bottom: 0px; padding-right: 10px;}
 h3 {
 	margin-top: 0px;
 	font-size: 1.2em;
+	color: white;
+	text-rendering: auto;
+	border-bottom: 1px solid white;
+}
+
+h4 {
+	color: white;
+	font-size: 1em;
 }
 
 .subhead { margin-top: 30px; display:block; }
@@ -22,28 +30,22 @@ h3 {
 .survival-counter, .survival-counter-background {
 	position: absolute;
 	top: 0px;
-	left: 30px;
+	left: 15px;
 }
 
 .survival-counter {
 	padding: 15px;
 }
 
-.survival-counter table {
-	width: 270px;
-}
-
-.survival-counter table td {
-	vertical-align: top;
-}
-
 .survival-counter-background {
-	background-color: white;
+	background-color: #202020;
 	opacity: 0.8;
-	width: 300px;
-	height: 200px;
-	border: 1px solid silver;
-	border-top: 2px solid rgb(102, 102, 102);
+	width: 230px;
+	height: 680px;
+	border-top: -1px solid black;
+	-moz-box-shadow: -1px 4px 9px #000000;
+	-webkit-box-shadow: -1px 4px 9px #000000;
+	box-shadow: -1px 4px 9px #000000;
 }
 
 #alert-box {
