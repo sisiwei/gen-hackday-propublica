@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	loadMaps();
 	travelTime("Brooklyn", "Sunnyside, Queens");
+	$('#survived').html(generatePeople(2));
+	$('#deceased').html(generatePeople(10));
 })
 
 function loadMaps(){
@@ -80,6 +82,7 @@ function loadMaps(){
     })
 }
 
+// Calculate travel times from any origin to destination
 function travelTime(origin, destination){
 	var url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&sensor=false";
 
@@ -89,4 +92,12 @@ function travelTime(origin, destination){
 	  seconds = data.routes[0].legs[0].duration.value;
 	  return seconds;
 	});
+}
+
+function generatePeople(number){
+	var temp = [];
+	$.each(_.range(number), function(k,v){
+		temp.push('<img class="person" src="img/person.png" />');
+	})
+	return temp.join('');
 }
