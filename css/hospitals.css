@@ -1,0 +1,13 @@
+h2 { margin-bottom: 0px; }
+.float-left { float: left; }
+.clear { clear: both; }
+
+.opening-container {
+	position: relative;
+}
+
+.instructions {
+	position: absolute;
+	top: 10px;
+	left: 40%;
+}
