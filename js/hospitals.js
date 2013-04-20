@@ -7,7 +7,6 @@ $(document).ready(function(){
 
 function loadMaps(){
 	// var mapInit = new google.maps.LatLngBounds();
-
 	var PPstyles = [
 	  {
 	      featureType: "road",
@@ -65,6 +64,7 @@ function loadMaps(){
 
     var map = new google.maps.Map( document.getElementById('map-container'), PPopts );
     map.mapTypes.set('propublica', mapType);
+    var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
 			 var marker = new google.maps.Marker({
@@ -74,7 +74,10 @@ function loadMaps(){
 			});   	
     });
 
-	var currentVictim = new VictimDragger([40.706777, -74.012854], map)
+	var currentVictim = new VictimDragger([40.706777, -74.012854], map);
+
+	// For testing only:
+	// setInterval(function(){ new VictimDragger([40.706777, -74.012854], map); }, 2000);
 }
 
 // Calculate travel times from any origin to destination

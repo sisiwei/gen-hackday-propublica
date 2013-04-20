@@ -45,3 +45,19 @@ h3 {
 	border: 1px solid silver;
 	border-top: 2px solid rgb(102, 102, 102);
 }
+
+#alert-box {
+	top: 10px;
+	right: 25px;
+	background-color: #202020;
+	border: 1px solid black;
+	opacity: 0.8;
+	color: white;
+	padding: 15px;
+	position: absolute;
+	display: none;
+	-moz-box-shadow: 5px 4px 9px #000000;
+	-webkit-box-shadow: 5px 4px 9px #000000;
+	box-shadow: 5px 4px 9px #000000;
+	border-radius: 5px;
+}

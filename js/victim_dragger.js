@@ -11,7 +11,7 @@ var VictimDragger = function(startCoords, map) {
     animation: google.maps.Animation.DROP,
     icon: 'img/red-dot.png'
   });
-  that.createAlert();
+  that.createAlert(map, startCoords);
 
   google.maps.event.addListener(this.marker, 'dragstart', function(){
   });
@@ -48,14 +48,20 @@ VictimDragger.getDistance = function(xa, xb, ya, yb) {
   return Math.sqrt( Math.pow((xa - xb), 2) + Math.pow((ya - yb), 2) );
 }
 
-VictimDragger.prototype.createAlert = function(pos){
-  overlay = new google.maps.OverlayView();
-  overlay.draw = function() {};
-  overlay.setMap(map);
-  var point = overlay.getProjection().fromLatLngToDivPixel(pos); 
-  console.log(this.victimName + " is having a heart attack!");
-}
+VictimDragger.prototype.createAlert = function(map, pos){
+  // var overlay = new google.maps.OverlayView();
+  // overlay.draw = function() {};
+  // overlay.setMap(map);
+  // var point = overlay.getProjection().fromLatLngToDivPixel(pos); 
+  var text = "<div class='alert'>" + this.victimName + " is having a heart attack!</div>";
+  $('#alert-box').html(text);
+  $('#alert-box').fadeIn();
+  setTimeout(function(){ 
+    $('#alert-box').fadeOut(); 
+  },1500);
 
+
+}
 
 VictimDragger.prototype.dropSuccess = function(name) {
   console.log("dropped on:" + name);
