@@ -1,13 +1,15 @@
+var NEEDSHELP = 0;
+
 $(document).ready(function(){
 	loadMaps();
 	travelTime("Brooklyn", "Sunnyside, Queens");
-	$('#survived').html(generatePeople(2));
-	$('#deceased').html(generatePeople(10));
+	$('#hospitalized').html(generatePeople(40, "red"));
+	$('#survived').html(generatePeople(2, "green"));
+	$('#deceased').html(generatePeople(10, "red"));
 })
 
 function loadMaps(){
 	// var mapInit = new google.maps.LatLngBounds();
-
 	var PPstyles = [
 	  {
 	      featureType: "road",
@@ -58,7 +60,7 @@ function loadMaps(){
 	    disableDoubleClickZoom: true,
 	    panControl: false,
 	    draggable: false,
-	    center: new google.maps.LatLng(40.7363, -73.9271)
+	    center: new google.maps.LatLng(40.7363, -73.9571)
 	};
 
     var mapType = new google.maps.StyledMapType(PPstyles, PPopts);
@@ -70,12 +72,13 @@ function loadMaps(){
 		    mapBounds = this.getBounds();
 		});
 
+    var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
 			 var marker = new google.maps.Marker({
 			  position: new google.maps.LatLng(hospital.lat, hospital.lng),
 			  map: map,
-			  icon: 'img/blue-dot.png'
+			  icon: 'img/hospital.png'
 			});   	
     });
 
@@ -113,6 +116,9 @@ function loadMaps(){
 
 		//var currentVictim = new VictimDragger([40.706777, -74.012854], map)
 		//generateVictim();
+
+	// For testing only:
+	// setInterval(function(){ new VictimDragger([40.706777, -74.012854], map); }, 2000);
 }
  
 
@@ -128,10 +134,10 @@ function travelTime(origin, destination){
 	});
 }
 
-function generatePeople(number){
+function generatePeople(number, color){
 	var temp = [];
 	$.each(_.range(number), function(k,v){
-		temp.push('<img class="person" src="img/person.png" />');
+		temp.push('<img class="person" src="img/person-' + color + '.png" />');
 	})
 	return temp.join('');
 }

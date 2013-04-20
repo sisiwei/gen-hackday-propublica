@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/hospitals.css" />
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
   <script src="js/vendor/underscore.js"></script>
   <script src="js/vendor/custom.modernizr.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&client=gme-propublicainc"></script>
@@ -37,30 +37,18 @@
 		<div class="large-12 columns opening-container">
 			<div class="instructions">YOUR MISSION</div>
 			<div id="map-container" style="width:100%; height: 680px;"></div>
+			<div id="alert-box"></div>
 			<div class="survival-counter-background"></div>
 			<div class="survival-counter">
 				<h3>Patient monitor</h3>
-				<table>
-					<tbody>
-						<tr>
-							<td width=100>Needs help</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>Hospitalized</td>
-							<td id="hospitalized"></td>
-						</tr>
-						<tr>
-							<td>Survived</td>
-							<td id="survived"></td>
-						</tr>
-						<tr>
-							<td>Deceased</td>
-							<td id="deceased"></td>
-						</tr>
-					</tbody>
-				</table>
-
+				<h4>Needs help</h4>
+				<div id="needs-help" class="people-holders"></div>
+				<h4>Hospitalized</h4>
+				<div id="hospitalized" class="people-holders"></div>
+				<h4>Survived</h4>
+				<div id="survived" class="people-holders"></div>
+				<h4>Deceased</h4>
+				<div id="deceased" class="people-holders"></div>
 			</div>
 		</div>
 	</div>
