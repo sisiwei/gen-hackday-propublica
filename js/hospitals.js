@@ -62,5 +62,19 @@ function loadMaps(){
 
     var map = new google.maps.Map( document.getElementById('map-container'), PPopts );
     map.mapTypes.set('propublica', mapType);
-		
+
+    _(HOSPITALS).each(function(hospital) {
+			 var marker = new google.maps.Marker({
+			  position: new google.maps.LatLng(hospital.lat, hospital.lng),
+			  map: map,
+			  icon: 'img/blue-dot.png'
+			});   	
+    });
+
+    // initial 'victim'
+    var victimMarker = new google.maps.Marker({
+    	position : new google.maps.LatLng(40.706777, -74.012854),
+    	map : map,
+    	icon: 'img/red-dot.png'
+    })
 }
