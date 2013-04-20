@@ -12,11 +12,12 @@ var VictimDragger = function(startCoords, map) {
   });
 
   google.maps.event.addListener(this.marker, 'dragstart', function(){
-   console.log("starting to drag");
   });
 
   google.maps.event.addListener(this.marker, 'dragend', function(){
-    that.geocodePosition(that.marker.getPosition(), function(pos) { new that.drop(pos); });
+    that.geocodePosition(that.marker.getPosition(), function(pos) { 
+      that.dropSuccess(that.drop(pos)); 
+    });
   });
 };
 
@@ -32,14 +33,19 @@ VictimDragger.prototype.geocodePosition = function(pos, cb) {
 }
 
 VictimDragger.prototype.drop = function(pos) {
-  console.log(pos);
   // find out if they're near a hospital
   for (var i = 0; i < HOSPITALS.length; i++) {
-    var dist = VictimDragger.getDistance(pos.geometry.latitude, HOSPITALS[i].lat, pos.geometry.longitude, HOSPITALS[i].lng)
-    console.log(dist);
+    var dist = VictimDragger.getDistance(pos.geometry.location.lat(), HOSPITALS[i].lat, pos.geometry.location.lng(), HOSPITALS[i].lng)
+    if (dist < 0.005) {
+      return HOSPITALS[i].hospital_name;
+    }
   }
 }
 
 VictimDragger.getDistance = function(xa, xb, ya, yb) {
   return Math.sqrt( Math.pow((xa - xb), 2) + Math.pow((ya - yb), 2) );
+}
+
+VictimDragger.prototype.dropSuccess = function(name) {
+  console.log("dropped on:" + name);
 }
