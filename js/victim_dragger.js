@@ -3,6 +3,7 @@ var VictimDragger = function(startCoords, map) {
 
   this.startCoords = startCoords;
   this.startTime = new Date().getTime();
+  this.victimName = RANDOM_NAMES[Math.floor(Math.random()*RANDOM_NAMES.length)];
   this.marker = new google.maps.Marker({
     position : new google.maps.LatLng(this.startCoords[0], this.startCoords[1]),
     map : map,
@@ -10,6 +11,7 @@ var VictimDragger = function(startCoords, map) {
     animation: google.maps.Animation.DROP,
     icon: 'img/red-dot.png'
   });
+  that.createAlert();
 
   google.maps.event.addListener(this.marker, 'dragstart', function(){
    console.log("starting to drag");
@@ -42,4 +44,12 @@ VictimDragger.prototype.drop = function(pos) {
 
 VictimDragger.getDistance = function(xa, xb, ya, yb) {
   return Math.sqrt( Math.pow((xa - xb), 2) + Math.pow((ya - yb), 2) );
+}
+
+VictimDragger.prototype.createAlert = function(pos){
+  overlay = new google.maps.OverlayView();
+  overlay.draw = function() {};
+  overlay.setMap(map);
+  var point = overlay.getProjection().fromLatLngToDivPixel(pos); 
+  console.log(this.victimName + " is having a heart attack!");
 }

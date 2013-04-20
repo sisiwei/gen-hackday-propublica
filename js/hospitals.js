@@ -74,7 +74,7 @@ function loadMaps(){
 			});   	
     });
 
-		var currentVictim = new VictimDragger([40.706777, -74.012854], map)
+	var currentVictim = new VictimDragger([40.706777, -74.012854], map)
 }
 
 // Calculate travel times from any origin to destination
