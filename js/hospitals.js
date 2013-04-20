@@ -49,7 +49,7 @@ function loadMaps(){
 
 	var PPopts = {
 	    name: "propublica-map",
-	    zoom: 11,
+	    zoom: 12,
 	    mapTypeId: "propublica",
 	    mapTypeControl: false,
 	    streetViewControl: false,
