@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 		window.setGame = function(level) {
 			return window.game = setInterval(function(){
-				console.log("on level " + level)
+				//console.log("on level " + level)
 				generateVictim();
 			}, levels[level]);
 		}
@@ -37,9 +37,9 @@ $(document).ready(function(){
 				curLevel++
 				window.setClear();
 				window.setGame(curLevel)
-				console.log("levelup" + curLevel)
+				//console.log("levelup" + curLevel)
 			} else {
-				console.log('ending game');
+				//console.log('ending game');
 				window.setClear();
 				endGame();
 				window.clearInterval(window.fullGame);

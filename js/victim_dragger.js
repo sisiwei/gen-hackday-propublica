@@ -76,7 +76,7 @@ VictimDragger.calculateDeath = function(hospital, totalTravelTime) {
   if (survivalChance <= 0) {
     survivalChance = 5;
   }
-  console.log(survivalChance / 100);
+  //console.log(survivalChance / 100);
   return (Math.random() < survivalChance / 100) ? true : false
 };
 
