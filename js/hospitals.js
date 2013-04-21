@@ -78,11 +78,13 @@ function loadMaps(){
     var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
-		 var marker = new google.maps.Marker({
-		  position: new google.maps.LatLng(hospital.lat, hospital.lng),
-		  map: map,
-		  icon: 'img/hospital.png'
-		});   	
+    	if (hospital.heart_attack_mortality_rate) {
+			 	var marker = new google.maps.Marker({
+			  	position: new google.maps.LatLng(hospital.lat, hospital.lng),
+			  	map: map,
+			  	icon: 'img/hospital.png'
+				});
+		 	}
     });
 
     var boroughPolygons = []
@@ -124,18 +126,6 @@ function loadMaps(){
 
 }
  
-
-// Calculate travel times from any origin to destination
-function travelTime(origin, destination){
-	var url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&sensor=false";
-
-	$.ajax({
-	  url: url
-	}).done(function ( data ) {
-	  seconds = data.routes[0].legs[0].duration.value;
-	  return seconds;
-	});
-}
 
 function generatePeople(number, color){
 	var temp = [];
