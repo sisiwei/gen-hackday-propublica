@@ -11,16 +11,33 @@ $(document).ready(function(){
 	$('.start').click(function(){
 		$('.instructions-background').add('.instructions').fadeOut();
 		// Start adding victims.
-		generateVictim();
+		var levels   = [3000, 1500, 500];
+		var curLevel = 0;
 
-		var game = setInterval(function(){ 
-			generateVictim();
-		}, 3000);
+		window.setGame = function(level) {
+			return window.game = setInterval(function(){
+				console.log("on level " + level)
+				generateVictim();
+			}, levels[level]);
+		}
 
-		window.setTimeout(function(){
-			clearInterval(game);
-			endGame();
-		}, 30000);
+		window.setClear = function() {
+			window.clearInterval(window.game, 5000)
+		}
+
+		var fullGame = window.setInterval(function() {
+			if (curLevel < levels.length - 1) {
+				curLevel++
+				window.setClear();
+				window.setGame(curLevel)
+				console.log("levelup" + curLevel)
+			} else {
+				window.setClear();
+				endGame();
+			}
+		}, 10000)
+
+		window.setGame(0)
 	})
 
 })
