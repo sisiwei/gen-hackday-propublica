@@ -129,18 +129,6 @@ function loadMaps(){
 }
  
 
-// Calculate travel times from any origin to destination
-function travelTime(origin, destination){
-	var url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&sensor=false";
-
-	$.ajax({
-	  url: url
-	}).done(function ( data ) {
-	  seconds = data.routes[0].legs[0].duration.value;
-	  return seconds;
-	});
-}
-
 function generatePeople(number, color){
 	var temp = [];
 	$.each(_.range(number), function(k,v){
