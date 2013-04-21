@@ -14,6 +14,7 @@ $(document).ready(function(){
 		var levels   = [3000, 2000, 1000];
 		var curLevel = 0;
 		var levelLength = 5000;
+		var fullGameLength = levelLength * levels.length;
 
 		window.setGame = function(level) {
 			return window.game = setInterval(function(){
@@ -36,7 +37,7 @@ $(document).ready(function(){
 				window.setClear();
 				endGame();
 			}
-		}, 10000)
+		}, fullGameLength)
 
 		window.setGame(0)
 	})
