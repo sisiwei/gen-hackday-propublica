@@ -42,9 +42,13 @@ h4 {
 	opacity: 0.8;
 }
 
-/* .instructions, */
-.resolution-sad, .resolution-congrats {
+/*  .resolution-congrats*/
+.instructions, .resolution-sad  {
 	display:none;
+}
+
+.black-panel.resolution-sad, .black-panel.resolution-congrats {
+	top: 60px;
 }
 
 .black-panel {
