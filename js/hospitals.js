@@ -14,6 +14,9 @@ $(document).ready(function(){
 	// Handling the opening screen
 	$('.start').click(function(){
 
+		$('.success.score').html(SURVIVED);
+		$('.deceased.score').html(DECEASED);
+		$('#needs-help').empty();
 		$('.instructions-background').add('.black-panel').fadeOut();
 		// Start adding victims.
 		var levels   = [3000, 2000, 1000];
@@ -179,7 +182,7 @@ function endGame(){
 	$('.final-total').html(TOTAL);
 	$('.final-needs-help').html(NEEDSHELP);
 
-	if (SURVIVED >= DECEASED){
+	if (SURVIVED >= DECEASED && SURVIVED > 0){
 		$('.resolution-congrats').fadeIn();
 	} else {
 		$('.resolution-sad').fadeIn();
