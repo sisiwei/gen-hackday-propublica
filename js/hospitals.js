@@ -1,4 +1,5 @@
-var NEEDSHELP = 0,
+var TOTAL = 0,
+	NEEDSHELP = 0,
 	SURVIVED = 0,
 	DECEASED = 0;
 var map;
@@ -149,7 +150,7 @@ function loadMaps(){
 
 	google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
 	    mapBounds = this.getBounds();
-	    $('.start').html("I'm ready. Start the game.");
+	    $('#start-button').html("I'm ready. Start the game.");
 	});
 
 }
@@ -165,5 +166,13 @@ function generatePeople(number, color){
 
 function endGame(){
 	$('.instructions-background').fadeIn();
+	$('#final-saved').html(SURVIVED);
+	$('#final-total').html(TOTAL);
+
+	if (SURVIVED >= DECEASED){
+		$('.resolution-congrats').fadeIn();
+	} else {
+		$('.resolution-sad').fadeIn();
+	}
 
 }

@@ -12,6 +12,7 @@ var VictimDragger = function(startCoords, map) {
     icon: 'img/person-red.png'
   });
   VictimDragger.createAlert(this.victimName + " is having a heart attack!");
+  TOTAL++;
 
   google.maps.event.addListener(this.marker, 'dragstart', function(){
   });

@@ -37,7 +37,11 @@ h4 {
 	opacity: 0.8;
 }
 
-.instructions {
+.resolution-sad, .resolution-congrats {
+	display:none;
+}
+
+.black-panel {
 	position: absolute;
 	color: #ccc;
 	top: 100px;
@@ -48,12 +52,12 @@ h4 {
 	text-shadow: 1px 0 3px #000;
 }
 
-.instructions h2 {
+.black-panel h2 {
 	color: white;
 	text-shadow: 1px 0 3px #000;
 }
 
-.instructions p strong {
+.black-panel p strong {
 	color: #34b84f;
 }
 
@@ -176,6 +180,17 @@ h5 {
 
 .success { color: #34b84f; }
 .deceased { color: #e14949; }
+
+.action-panel {
+	width: 260px;
+	float: left;
+}
+
+.action-panel p {
+	margin-bottom: 0.6em;
+	color:white;
+	font-weight: bold;
+}
 
 a.start {
 	padding: 16px 0px;
