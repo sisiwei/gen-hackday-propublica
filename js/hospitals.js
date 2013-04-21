@@ -39,8 +39,11 @@ $(document).ready(function(){
 				window.setGame(curLevel)
 				console.log("levelup" + curLevel)
 			} else {
+				console.log('ending game');
 				window.setClear();
 				endGame();
+				// for starting over...
+				curLevel = 0;
 			}
 		}, fullGameLength)
 
@@ -182,4 +185,9 @@ function endGame(){
 		$('.resolution-sad').fadeIn();
 	}
 
+	TOTAL = 0,
+	NEEDSHELP = 0,
+	SURVIVED = 0,
+	DECEASED = 0;
+	_(VictimDragger.allMarkers).each(function(m) { m.setMap(null) } );
 }

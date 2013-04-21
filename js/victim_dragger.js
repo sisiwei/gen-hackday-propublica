@@ -11,6 +11,7 @@ var VictimDragger = function(startCoords, map) {
     animation: google.maps.Animation.DROP,
     icon: 'img/person-red.png'
   });
+  VictimDragger.allMarkers.push(this.marker);
   VictimDragger.createAlert(this.victimName + " is having a heart attack!");
   TOTAL++;
 
@@ -23,6 +24,8 @@ var VictimDragger = function(startCoords, map) {
     });
   });
 };
+
+VictimDragger.allMarkers = [];
 
 VictimDragger.prototype.geocodePosition = function(pos, cb) {
    geocoder = new google.maps.Geocoder();
