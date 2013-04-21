@@ -10,8 +10,9 @@ $(document).ready(function(){
 	$('.start').click(function(){
 		$('.instructions-background').add('.instructions').fadeOut();
 		// Start adding victims.
-		var levels   = [3000, 1500, 500];
+		var levels   = [3000, 2000, 1000];
 		var curLevel = 0;
+		var levelLength = 5000;
 
 		window.setGame = function(level) {
 			return window.game = setInterval(function(){
@@ -21,7 +22,7 @@ $(document).ready(function(){
 		}
 
 		window.setClear = function() {
-			window.clearInterval(window.game, 5000)
+			window.clearInterval(window.game, levelLength)
 		}
 
 		var fullGame = window.setInterval(function() {
@@ -122,7 +123,6 @@ function loadMaps(){
     var nyBoroughs = new GeoJSON(NY_BOROUGHS, {fillColor : "#999999", fillOpacity: 0.25, strokeWeight: 1, map : map, strokeColor : "#999999" });
     for (var i = 0; i < nyBoroughs.length; i++) {
     	for (var j = 0; j < nyBoroughs[i].length; j++) {
-    		console.log(nyBoroughs[i][j].error)
     		var feature = nyBoroughs[i][j];
     		boroughPolygons.push(feature);
     		feature.setMap(map);
