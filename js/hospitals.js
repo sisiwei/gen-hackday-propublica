@@ -60,7 +60,7 @@ function loadMaps(){
 	    disableDoubleClickZoom: true,
 	    panControl: false,
 	    draggable: false,
-	    center: new google.maps.LatLng(40.7363, -73.9571)
+	    center: new google.maps.LatLng(40.7350, -73.9571)
 	};
 
     var mapType = new google.maps.StyledMapType(PPstyles, PPopts);
