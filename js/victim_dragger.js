@@ -75,10 +75,7 @@ VictimDragger.prototype.dropSuccess = function(hospital) {
     VictimDragger.createResult(that.victimName, success, hospital, speedRate, hospital.hospital_rating_str);
     that.marker.setMap(null);
     //window.setTimeout(window.generateVictim, 3100);
-    NEEDSHELP--;
-    $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
     
-
   });
 }
 
@@ -103,9 +100,29 @@ VictimDragger.createResult = function(name, success, hospital, speedRate, hospit
     "Above average": "ABOVE AVG."
   }
 
-
   var html = '<h5>' + name + ' ' + displaySuccess(success) + '</h5> <table> <tr> <td class="nlabel">TRANSPORT SPEED:</td> <td id="speed-score"><span class="' + rateLookup[speedRate] + '">FAST</span></td> </tr> <tr> <td class="nlabel">HOSPITAL QUALITY:</td> <td id="hospital-score"><span class="' + rateLookup[hospitalRate] + '">' + displayText[hospitalRate] + '</span></td> </tr> </table>';
-  console.log(html);
+
+  executeUpdates(success, html);
+
+  function executeUpdates(success, html){
+    if (success){
+      SURVIVED++;
+      $('.success').html(SURVIVED);
+      $('#survived').find('.notif').html(html);
+      $('#survived').find('.notif').fadeIn();
+      setTimeout(function(){ $('#survived').find('.notif').fadeOut(); }, 2000); 
+    } else {
+      DECEASED++;
+      $('.deceased').html(DECEASED);
+      $('#deceased').find('.notif').html(html);
+      $('#deceased').find('.notif').fadeIn();
+      setTimeout(function(){ $('#deceased').find('.notif').fadeOut(); }, 2000); 
+    }
+
+    NEEDSHELP--;
+    $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
+  }
+
 
 }
 
