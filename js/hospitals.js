@@ -68,9 +68,6 @@ function loadMaps(){
     var map = new google.maps.Map( document.getElementById('map-container'), PPopts );
     map.mapTypes.set('propublica', mapType);
     var mapBounds;
-		google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
-		    mapBounds = this.getBounds();
-		});
 
     var overlay = new google.maps.OverlayView();
 
@@ -103,10 +100,8 @@ function loadMaps(){
     	// get a random point inside the nyEnvelope, then check if it's within the nyBoroughs bounds
   		var point = [nyEnvelope[0] + (Math.random() * (nyEnvelope[2] - nyEnvelope[0])), 
   							 	nyEnvelope[1] + (Math.random() * (nyEnvelope[3] - nyEnvelope[1]))]
-  		//console.log(point);
   		for (i = 0; i < boroughPolygons.length; i++) {
   			if (google.maps.geometry.poly.containsLocation(new google.maps.LatLng(point[0], point[1]), boroughPolygons[i])) {
-  				//console.log("HERE")
   				return new VictimDragger(point, map)
   			}
   		}
@@ -114,11 +109,11 @@ function loadMaps(){
   		return generateVictim();
     }
 
-		//var currentVictim = new VictimDragger([40.706777, -74.012854], map)
-		//generateVictim();
+		google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
+		    mapBounds = this.getBounds();
+		    window.setTimeout(function() { generateVictim() }, 500 );
+		});
 
-	// For testing only:
-	// setInterval(function(){ new VictimDragger([40.706777, -74.012854], map); }, 2000);
 }
  
 
