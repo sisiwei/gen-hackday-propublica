@@ -11,7 +11,7 @@ var VictimDragger = function(startCoords, map) {
     animation: google.maps.Animation.DROP,
     icon: 'img/person-red.png'
   });
-  VictimDragger.createAlert(this.victimName + " is having a heart attack!", 1500, "alert");
+  VictimDragger.createAlert(this.victimName + " is having a heart attack!");
 
   google.maps.event.addListener(this.marker, 'dragstart', function(){
   });
@@ -48,36 +48,65 @@ VictimDragger.getDistance = function(xa, xb, ya, yb) {
   return Math.sqrt( Math.pow((xa - xb), 2) + Math.pow((ya - yb), 2) );
 }
 
-VictimDragger.createAlert = function(msg, duration, target){
-  if (target == "alert"){
-    var text = "<div class='alert'>" + msg + "</div>";
-    $('#alert-box').html(text);
-    $('#alert-box').fadeIn();
-    setTimeout(function(){ $('#alert-box').fadeOut(); }, duration || 1500); 
-    NEEDSHELP++;
-    $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
-  } else if (target == "message"){
-    var text = "<div class='alert'>" + msg + "</div>";
-    $('#hospital-box').prepend(text);
-  }
-
+VictimDragger.createAlert = function(msg, duration){
+  var text = "<div class='alert'>" + msg + "</div>";
+  $('#alert-box').html(text);
+  $('#alert-box').fadeIn();
+  setTimeout(function(){ $('#alert-box').fadeOut(); }, 1500); 
+  NEEDSHELP++;
+  $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
 }
 
 VictimDragger.prototype.dropSuccess = function(hospital) {
   var that = this;
   this.travelTime(hospital, function(resp) { 
-    VictimDragger.createAlert("You took <span style='color: #e04848;'>" + that.victimName + "</span> to " + hospital.hospital_name +
-      " <br\/>where the heart attack mortality rate is " + hospital.heart_attack_mortality_rate + "%." +
-      " It took " +  resp.routes[0].legs[0].duration.text + " to travel the " + resp.routes[0].legs[0].distance.text + "."
-    , 3000, "message")
+    // VictimDragger.createAlert("You took <span style='color: #e04848;'>" + that.victimName + "</span> to " + hospital.hospital_name +
+    //   " <br\/>where the heart attack mortality rate is " + hospital.heart_attack_mortality_rate + "%." +
+    //   " It took " +  resp.routes[0].legs[0].duration.text + " to travel the " + resp.routes[0].legs[0].distance.text + "."
+    // , 3000, "message")
+
+    // Calcuate chance of survival. Which needs to move the individual from needshelp.
+    var success = false,
+        speedRate = "Fast";
+
+
+
+    // Displaying the result
+    VictimDragger.createResult(that.victimName, success, hospital, speedRate, hospital.hospital_rating_str);
     that.marker.setMap(null);
     //window.setTimeout(window.generateVictim, 3100);
     NEEDSHELP--;
     $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
     
-    // Calcuate chance of survival. Which needs to move the individual from needshelp.
 
   });
+}
+
+VictimDragger.createResult = function(name, success, hospital, speedRate, hospitalRate) {
+  var that = this;
+
+  function displaySuccess(success){
+    return success ? "SURVIVED!" : "didn't make it.";
+  }
+
+  var rateLookup = {
+    "Below average": "low",
+    "About average": "medium",
+    "Above average": "high",
+    "Slow": "low",
+    "Average": "medium",
+    "Fast": "high"
+  }
+  var displayText = {
+    "Below average": "BELOW AVG.",
+    "About average": "AVERAGE",
+    "Above average": "ABOVE AVG."
+  }
+
+
+  var html = '<h5>' + name + ' ' + displaySuccess(success) + '</h5> <table> <tr> <td class="nlabel">TRANSPORT SPEED:</td> <td id="speed-score"><span class="' + rateLookup[speedRate] + '">FAST</span></td> </tr> <tr> <td class="nlabel">HOSPITAL QUALITY:</td> <td id="hospital-score"><span class="' + rateLookup[hospitalRate] + '">' + displayText[hospitalRate] + '</span></td> </tr> </table>';
+  console.log(html);
+
 }
 
 // Calculate travel times from any origin to destination
