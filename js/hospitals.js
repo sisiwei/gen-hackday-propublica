@@ -3,7 +3,6 @@ var map;
 
 $(document).ready(function(){
 	loadMaps();
-	travelTime("Brooklyn", "Sunnyside, Queens");
 	// $('#hospitalized').html(generatePeople(40, "red"));
 	// $('#survived').html(generatePeople(2, "green"));
 	// $('#deceased').html(generatePeople(10, "red"));
@@ -82,11 +81,11 @@ function loadMaps(){
     var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
-		 var marker = new google.maps.Marker({
-		  position: new google.maps.LatLng(hospital.lat, hospital.lng),
-		  map: map,
-		  icon: 'img/hospital.png'
-		});   	
+		 	var marker = new google.maps.Marker({
+		  	position: new google.maps.LatLng(hospital.lat, hospital.lng),
+		  	map: map,
+		  	icon: 'img/hospital.png'
+			});   	
     });
 
     var boroughPolygons = []
