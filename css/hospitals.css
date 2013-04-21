@@ -37,7 +37,7 @@ h4 {
 	opacity: 0.8;
 }
 
-.instructions, .resolution-sad {
+.resolution-sad, .resolution-congrats {
 	display:none;
 }
 

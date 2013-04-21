@@ -152,4 +152,10 @@ function endGame(){
 	$('#final-saved').html(SURVIVED);
 	$('#final-total').html(TOTAL);
 
+	if (SURVIVED >= DECEASED){
+		$('.resolution-congrats').fadeIn();
+	} else {
+		$('.resolution-sad').fadeIn();
+	}
+
 }
