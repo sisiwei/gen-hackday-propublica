@@ -80,7 +80,7 @@ function loadMaps(){
     var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
-    	if (hospital.hospital_rating_str) {
+    	if (hospital.hospital_rating_str && hospital.rating_str !== "Unknown") {
 			 	var marker = new google.maps.Marker({
 			  	position: new google.maps.LatLng(hospital.lat, hospital.lng),
 			  	map: map,

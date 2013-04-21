@@ -32,7 +32,7 @@ VictimDragger.prototype.geocodePosition = function(pos, cb) {
         cb(false);
       }
    });
-}
+};
 
 VictimDragger.prototype.drop = function(pos) {
   // find out if they're near a hospital
@@ -42,11 +42,11 @@ VictimDragger.prototype.drop = function(pos) {
       return HOSPITALS[i];
     }
   }
-}
+};
 
 VictimDragger.getDistance = function(xa, xb, ya, yb) {
   return Math.sqrt( Math.pow((xa - xb), 2) + Math.pow((ya - yb), 2) );
-}
+};
 
 VictimDragger.createAlert = function(msg, duration){
   var text = "<div class='alert'>" + msg + "</div>";
@@ -55,17 +55,41 @@ VictimDragger.createAlert = function(msg, duration){
   setTimeout(function(){ $('#alert-box').fadeOut(); }, 1500); 
   NEEDSHELP++;
   $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
-}
+};
+
+VictimDragger.calculateDeath = function(hospital, totalTravelTime) {
+  var NY_AVG = 97.95;
+  var survivalChance = 100;
+  var fudge = 5;
+  survivalChance -= (Math.floor(totalTravelTime) * 10)
+  // do something with death rate
+  if (hospital.heart_care_rating > (NY_AVG + 0.5)) {
+    survivalChance += fudge
+  }
+  if (hospital.heart_care_rating < (NY_AVG - 0.5)) {
+    survivalChance -= fudge
+  }
+  if (survivalChance <= 0) {
+    survivalChance = 5;
+  }
+  console.log(survivalChance / 100);
+  return (Math.random() < survivalChance / 100) ? "survived" : "died" 
+};
 
 VictimDragger.prototype.dropSuccess = function(hospital) {
   var that = this;
-  this.travelTime(hospital, function(resp) { 
+  this.elapsedTime = ((new Date().getTime() - this.startTime) / 1000);
+  //console.log(this.elapsedTime)
+  this.travelTime(hospital, function(resp) {
     // VictimDragger.createAlert("You took <span style='color: #e04848;'>" + that.victimName + "</span> to " + hospital.hospital_name +
     //   " <br\/>where the heart attack mortality rate is " + hospital.heart_attack_mortality_rate + "%." +
     //   " It took " +  resp.routes[0].legs[0].duration.text + " to travel the " + resp.routes[0].legs[0].distance.text + "."
     // , 3000, "message")
 
     // Calcuate chance of survival. Which needs to move the individual from needshelp.
+    var totalTravelTimeMinutes = ((that.elapsedTime + resp.routes[0].legs[0].duration.value) / 60)
+    //console.log(totalTravelTimeMinutes);
+    console.log(VictimDragger.calculateDeath(hospital, totalTravelTimeMinutes))
     var success = false,
         speedRate = "Fast";
 
@@ -80,7 +104,7 @@ VictimDragger.prototype.dropSuccess = function(hospital) {
     
 
   });
-}
+};
 
 VictimDragger.createResult = function(name, success, hospital, speedRate, hospitalRate) {
   var that = this;
@@ -105,9 +129,9 @@ VictimDragger.createResult = function(name, success, hospital, speedRate, hospit
 
 
   var html = '<h5>' + name + ' ' + displaySuccess(success) + '</h5> <table> <tr> <td class="nlabel">TRANSPORT SPEED:</td> <td id="speed-score"><span class="' + rateLookup[speedRate] + '">FAST</span></td> </tr> <tr> <td class="nlabel">HOSPITAL QUALITY:</td> <td id="hospital-score"><span class="' + rateLookup[hospitalRate] + '">' + displayText[hospitalRate] + '</span></td> </tr> </table>';
-  console.log(html);
+  //console.log(html);
 
-}
+};
 
 // Calculate travel times from any origin to destination
 VictimDragger.prototype.travelTime = function(hospital, cb){
@@ -126,4 +150,4 @@ VictimDragger.prototype.travelTime = function(hospital, cb){
       //directionsDisplay.setDirections(result);
     }
   });
-}
+};
