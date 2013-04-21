@@ -81,11 +81,13 @@ function loadMaps(){
     var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
-		 	var marker = new google.maps.Marker({
-		  	position: new google.maps.LatLng(hospital.lat, hospital.lng),
-		  	map: map,
-		  	icon: 'img/hospital.png'
-			});   	
+    	if (hospital.heart_attack_mortality_rate) {
+			 	var marker = new google.maps.Marker({
+			  	position: new google.maps.LatLng(hospital.lat, hospital.lng),
+			  	map: map,
+			  	icon: 'img/hospital.png'
+				});
+		 	}
     });
 
     var boroughPolygons = []
