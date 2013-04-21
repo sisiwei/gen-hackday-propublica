@@ -1,11 +1,9 @@
-var NEEDSHELP = 0;
+var TOTAL = 0,
+	NEEDSHELP = 0;
 var map;
 
 $(document).ready(function(){
 	loadMaps();
-	// $('#hospitalized').html(generatePeople(40, "red"));
-	// $('#survived').html(generatePeople(2, "green"));
-	// $('#deceased').html(generatePeople(10, "red"));
 
 	// Handling the opening screen
 	$('.start').click(function(){
@@ -14,7 +12,6 @@ $(document).ready(function(){
 		generateVictim();
 		window.setInterval(function() { generateVictim() }, 3000 );
 	})
-
 
 })
 
