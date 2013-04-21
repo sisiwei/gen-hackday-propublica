@@ -112,6 +112,7 @@ function loadMaps(){
 		google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
 		    mapBounds = this.getBounds();
 		    window.setTimeout(function() { generateVictim() }, 500 );
+		    //window.setInterval(function() { generateVictim() }, 3000 );
 		});
 
 }
