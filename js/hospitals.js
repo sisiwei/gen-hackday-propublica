@@ -46,7 +46,8 @@ $(document).ready(function(){
 				curLevel = 0;
 			}
 		}, fullGameLength)
-
+		
+		generateVictim();
 		window.setGame(0)
 	})
 
