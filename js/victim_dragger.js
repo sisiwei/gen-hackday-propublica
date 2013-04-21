@@ -73,30 +73,22 @@ VictimDragger.calculateDeath = function(hospital, totalTravelTime) {
     survivalChance = 5;
   }
   console.log(survivalChance / 100);
-  return (Math.random() < survivalChance / 100) ? "survived" : "died" 
+  return (Math.random() < survivalChance / 100) ? true : false
 };
 
 VictimDragger.prototype.dropSuccess = function(hospital) {
   var that = this;
-  this.elapsedTime = ((new Date().getTime() - this.startTime) / 1000);
+  this.elapsedTime = ((new Date().getTime() - this.startTime) / 1000)/2;
   //console.log(this.elapsedTime)
   this.travelTime(hospital, function(resp) {
-    // VictimDragger.createAlert("You took <span style='color: #e04848;'>" + that.victimName + "</span> to " + hospital.hospital_name +
-    //   " <br\/>where the heart attack mortality rate is " + hospital.heart_attack_mortality_rate + "%." +
-    //   " It took " +  resp.routes[0].legs[0].duration.text + " to travel the " + resp.routes[0].legs[0].distance.text + "."
-    // , 3000, "message")
 
     // Calcuate chance of survival. Which needs to move the individual from needshelp.
     var totalTravelTimeMinutes = ((that.elapsedTime + resp.routes[0].legs[0].duration.value) / 60)
     //console.log(totalTravelTimeMinutes);
-    console.log(VictimDragger.calculateDeath(hospital, totalTravelTimeMinutes))
-    var success = false,
-        speedRate = "Fast";
-
-
+    var success = VictimDragger.calculateDeath(hospital, totalTravelTimeMinutes);
 
     // Displaying the result
-    VictimDragger.createResult(that.victimName, success, hospital, speedRate, hospital.hospital_rating_str);
+    VictimDragger.createResult(that.victimName, success, hospital, totalTravelTimeMinutes, hospital.hospital_rating_str);
     that.marker.setMap(null);
     //window.setTimeout(window.generateVictim, 3100);
     
@@ -124,7 +116,17 @@ VictimDragger.createResult = function(name, success, hospital, speedRate, hospit
     "Above average": "ABOVE AVG."
   }
 
-  var html = '<h5>' + name + ' ' + displaySuccess(success) + '</h5> <table> <tr> <td class="nlabel">TRANSPORT SPEED:</td> <td id="speed-score"><span class="' + rateLookup[speedRate] + '">FAST</span></td> </tr> <tr> <td class="nlabel">HOSPITAL QUALITY:</td> <td id="hospital-score"><span class="' + rateLookup[hospitalRate] + '">' + displayText[hospitalRate] +  '</span></td> </tr> </table>';
+  function determineSpeedQuality(speedRate){
+    if (speedRate < 10){
+      return "high"
+    } else if (speedRate < 20){
+      return "medium"
+    } else {
+      return "low"
+    }
+  }
+
+  var html = '<h5>' + name + ' ' + displaySuccess(success) + '</h5> <table> <tr> <td class="nlabel">TRANSPORT SPEED:</td> <td id="speed-score"><span class="' + determineSpeedQuality(speedRate) + '">' + Math.round(speedRate) + ' MINUTES</span></td> </tr> <tr> <td class="nlabel">HOSPITAL QUALITY:</td> <td id="hospital-score"><span class="' + rateLookup[hospitalRate] + '">' + displayText[hospitalRate] +  '</span></td> </tr> </table>';
 
   executeUpdates(success, html);
 

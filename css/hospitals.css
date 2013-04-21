@@ -92,6 +92,7 @@ h4 {
 	-webkit-box-shadow: 5px 4px 9px #000000;
 	box-shadow: 5px 4px 9px #000000;
 	border-radius: 5px;
+	-webkit-user-select: none;
 }
 
 .large-people {
