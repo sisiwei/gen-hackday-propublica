@@ -72,7 +72,6 @@ VictimDragger.prototype.dropSuccess = function(hospital) {
     , 3000)
     that.marker.setMap(null);
     window.setTimeout(window.generateVictim, 3100);
-    console.log(resp); 
   });
 }
 
