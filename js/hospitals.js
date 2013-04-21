@@ -6,10 +6,17 @@ $(document).ready(function(){
 	$('#hospitalized').html(generatePeople(40, "red"));
 	$('#survived').html(generatePeople(2, "green"));
 	$('#deceased').html(generatePeople(10, "red"));
+
+	// Handling the opening screen
+	$('.start').click(function(){
+		$('.instructions-background').add('.instructions').fadeOut();
+		// Start adding victims.
+	})
+
+
 })
 
 function loadMaps(){
-	// var mapInit = new google.maps.LatLngBounds();
 	var PPstyles = [
 	  {
 	      featureType: "road",
@@ -114,8 +121,8 @@ function loadMaps(){
   		return generateVictim();
     }
 
-		//var currentVictim = new VictimDragger([40.706777, -74.012854], map)
-		//generateVictim();
+	//var currentVictim = new VictimDragger([40.706777, -74.012854], map)
+	//generateVictim();
 
 	// For testing only:
 	// setInterval(function(){ new VictimDragger([40.706777, -74.012854], map); }, 2000);
