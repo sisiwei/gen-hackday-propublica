@@ -90,7 +90,7 @@ function loadMaps(){
     });
 
     var boroughPolygons = []
-    var nyBoroughs = new GeoJSON(NY_BOROUGHS, {fillColor : "#000000", fillOpacity: 0, strokeWeight: 1, map : map, strokeColor : "#999999" });
+    var nyBoroughs = new GeoJSON(NY_BOROUGHS, {fillColor : "#999999", fillOpacity: 0.25, strokeWeight: 1, map : map, strokeColor : "#999999" });
     for (var i = 0; i < nyBoroughs.length; i++) {
     	//console.log(nyBoroughs[i]);
     	for (var j = 0; j < nyBoroughs[i].length; j++) {

@@ -12,12 +12,14 @@ h3 {
 	color: white;
 	text-rendering: auto;
 	border-bottom: 1px solid white;
+	text-shadow: 1px 0 3px #000;
 }
 
 h4 {
 	color: white;
 	font-size: 1em;
 	margin: 8px 0 5px 0;
+	text-shadow: 1px 0 3px #000;
 }
 
 .subhead { margin-top: 30px; display:block; }
@@ -43,10 +45,13 @@ h4 {
 	width: 540px;
 	font-family: 'Helvetica Neue', Arial, sans-serif;
 	line-height: 22px;
+	text-shadow: 1px 0 3px #000;
 }
 
 .instructions h2 {
 	color: white;
+	text-shadow: 1px 0 3px #000;
+
 }
 
 .survival-counter, .survival-counter-background {
@@ -92,6 +97,7 @@ h4 {
 	font-size: 13px;
 	height: 312px;
 	overflow: auto;
+	overflow-x:hidden;
 }
 
 #hospital-box .alert {
