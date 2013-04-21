@@ -67,6 +67,11 @@ function loadMaps(){
 
     var map = new google.maps.Map( document.getElementById('map-container'), PPopts );
     map.mapTypes.set('propublica', mapType);
+    var mapBounds;
+		google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
+		    mapBounds = this.getBounds();
+		});
+
     var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
@@ -77,11 +82,45 @@ function loadMaps(){
 			});   	
     });
 
-	var currentVictim = new VictimDragger([40.706777, -74.012854], map);
+    var boroughPolygons = []
+    var nyBoroughs = new GeoJSON(NY_BOROUGHS, {fillColor : "#000000", fillOpacity: 0, strokeWeight: 1, map : map, strokeColor : "#999999" });
+    for (var i = 0; i < nyBoroughs.length; i++) {
+    	//console.log(nyBoroughs[i]);
+    	for (var j = 0; j < nyBoroughs[i].length; j++) {
+    		console.log(nyBoroughs[i][j].error)
+    		var feature = nyBoroughs[i][j];
+    		boroughPolygons.push(feature);
+    		feature.setMap(map);
+    	}
+    }
+
+    var generateVictim = window.generateVictim = function() {
+	    var nyEnvelope = [mapBounds.getSouthWest().lat(), 
+	    									mapBounds.getSouthWest().lng(), 
+	    									mapBounds.getNorthEast().lat(), 
+	    									mapBounds.getNorthEast().lng()]
+
+    	// get a random point inside the nyEnvelope, then check if it's within the nyBoroughs bounds
+  		var point = [nyEnvelope[0] + (Math.random() * (nyEnvelope[2] - nyEnvelope[0])), 
+  							 	nyEnvelope[1] + (Math.random() * (nyEnvelope[3] - nyEnvelope[1]))]
+  		//console.log(point);
+  		for (i = 0; i < boroughPolygons.length; i++) {
+  			if (google.maps.geometry.poly.containsLocation(new google.maps.LatLng(point[0], point[1]), boroughPolygons[i])) {
+  				//console.log("HERE")
+  				return new VictimDragger(point, map)
+  			}
+  		}
+  		// if our point falls outside the boroughs, call again
+  		return generateVictim();
+    }
+
+		//var currentVictim = new VictimDragger([40.706777, -74.012854], map)
+		//generateVictim();
 
 	// For testing only:
 	// setInterval(function(){ new VictimDragger([40.706777, -74.012854], map); }, 2000);
 }
+ 
 
 // Calculate travel times from any origin to destination
 function travelTime(origin, destination){
