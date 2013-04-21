@@ -80,11 +80,16 @@ function loadMaps(){
     var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
-    	if (hospital.hospital_rating_str && hospital.rating_str !== "Unknown") {
+    	if (hospital.hospital_rating_str && hospital.hospital_rating_str !== "Unknown") {
+    		var displayText = {
+					"Below average": "red",
+					"About average": "yellow",
+					"Above average": "green"
+				};
 			 	var marker = new google.maps.Marker({
 			  	position: new google.maps.LatLng(hospital.lat, hospital.lng),
 			  	map: map,
-			  	icon: 'img/hospital.png'
+			  	icon: 'img/hospital-' + displayText[hospital.hospital_rating_str] + '.png'
 				});
 		 	}
     });
