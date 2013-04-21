@@ -91,7 +91,7 @@ h4 {
 	width: 200px;
 	font-size: 13px;
 	height: 312px;
-	overflow: scroll;
+	overflow: auto;
 }
 
 #hospital-box .alert {

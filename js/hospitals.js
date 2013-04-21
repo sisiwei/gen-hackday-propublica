@@ -4,9 +4,9 @@ var map;
 $(document).ready(function(){
 	loadMaps();
 	travelTime("Brooklyn", "Sunnyside, Queens");
-	$('#hospitalized').html(generatePeople(40, "red"));
-	$('#survived').html(generatePeople(2, "green"));
-	$('#deceased').html(generatePeople(10, "red"));
+	// $('#hospitalized').html(generatePeople(40, "red"));
+	// $('#survived').html(generatePeople(2, "green"));
+	// $('#deceased').html(generatePeople(10, "red"));
 
 	// Handling the opening screen
 	$('.start').click(function(){

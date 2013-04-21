@@ -66,12 +66,17 @@ VictimDragger.createAlert = function(msg, duration, target){
 VictimDragger.prototype.dropSuccess = function(hospital) {
   var that = this;
   this.travelTime(hospital, function(resp) { 
-    VictimDragger.createAlert("You took " + that.victimName + " to " + hospital.hospital_name +
+    VictimDragger.createAlert("You took <span style='color: #e04848;'>" + that.victimName + "</span> to " + hospital.hospital_name +
       " <br\/>where the heart attack mortality rate is " + hospital.heart_attack_mortality_rate + "%." +
       " It took " +  resp.routes[0].legs[0].duration.text + " to travel the " + resp.routes[0].legs[0].distance.text + "."
     , 3000, "message")
     that.marker.setMap(null);
-    window.setTimeout(window.generateVictim, 3100);
+    //window.setTimeout(window.generateVictim, 3100);
+    NEEDSHELP--;
+    $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
+    
+    // Calcuate chance of survival. Which needs to move the individual from needshelp.
+
   });
 }
 
