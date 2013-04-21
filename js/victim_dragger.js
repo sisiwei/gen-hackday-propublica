@@ -11,7 +11,7 @@ var VictimDragger = function(startCoords, map) {
     animation: google.maps.Animation.DROP,
     icon: 'img/person-red.png'
   });
-  VictimDragger.createAlert(this.victimName + " is having a heart attack!");
+  VictimDragger.createAlert(this.victimName + " is having a heart attack!", 1500, "alert");
 
   google.maps.event.addListener(this.marker, 'dragstart', function(){
   });
@@ -48,19 +48,19 @@ VictimDragger.getDistance = function(xa, xb, ya, yb) {
   return Math.sqrt( Math.pow((xa - xb), 2) + Math.pow((ya - yb), 2) );
 }
 
-VictimDragger.createAlert = function(msg, duration){
-  // var overlay = new google.maps.OverlayView();
-  // overlay.draw = function() {};
-  // overlay.setMap(map);
-  // var point = overlay.getProjection().fromLatLngToDivPixel(pos); 
-  var text = "<div class='alert'>" + msg + "</div>";
-  $('#alert-box').html(text);
-  $('#alert-box').fadeIn();
-  setTimeout(function(){ 
-    $('#alert-box').fadeOut(); 
-  }, duration || 1500);
-  NEEDSHELP++;
-  $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
+VictimDragger.createAlert = function(msg, duration, target){
+  if (target == "alert"){
+    var text = "<div class='alert'>" + msg + "</div>";
+    $('#alert-box').html(text);
+    $('#alert-box').fadeIn();
+    setTimeout(function(){ $('#alert-box').fadeOut(); }, duration || 1500); 
+    NEEDSHELP++;
+    $('#needs-help').html(generatePeople(NEEDSHELP, "red"));
+  } else if (target == "message"){
+    var text = "<div class='alert'>" + msg + "</div>";
+    $('#hospital-box').prepend(text);
+  }
+
 }
 
 VictimDragger.prototype.dropSuccess = function(hospital) {
@@ -69,7 +69,7 @@ VictimDragger.prototype.dropSuccess = function(hospital) {
     VictimDragger.createAlert("You took " + that.victimName + " to " + hospital.hospital_name +
       " <br\/>where the heart attack mortality rate is " + hospital.heart_attack_mortality_rate + "%." +
       " It took " +  resp.routes[0].legs[0].duration.text + " to travel the " + resp.routes[0].legs[0].distance.text + "."
-    , 3000)
+    , 3000, "message")
     that.marker.setMap(null);
     window.setTimeout(window.generateVictim, 3100);
   });

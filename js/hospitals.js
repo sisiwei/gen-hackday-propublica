@@ -1,4 +1,5 @@
 var NEEDSHELP = 0;
+var map;
 
 $(document).ready(function(){
 	loadMaps();
@@ -11,6 +12,8 @@ $(document).ready(function(){
 	$('.start').click(function(){
 		$('.instructions-background').add('.instructions').fadeOut();
 		// Start adding victims.
+		generateVictim();
+		window.setInterval(function() { generateVictim() }, 3000 );
 	})
 
 
@@ -72,18 +75,18 @@ function loadMaps(){
 
     var mapType = new google.maps.StyledMapType(PPstyles, PPopts);
 
-    var map = new google.maps.Map( document.getElementById('map-container'), PPopts );
+    map = new google.maps.Map( document.getElementById('map-container'), PPopts );
     map.mapTypes.set('propublica', mapType);
     var mapBounds;
 
     var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
-			 var marker = new google.maps.Marker({
-			  position: new google.maps.LatLng(hospital.lat, hospital.lng),
-			  map: map,
-			  icon: 'img/hospital.png'
-			});   	
+		 var marker = new google.maps.Marker({
+		  position: new google.maps.LatLng(hospital.lat, hospital.lng),
+		  map: map,
+		  icon: 'img/hospital.png'
+		});   	
     });
 
     var boroughPolygons = []
@@ -100,9 +103,9 @@ function loadMaps(){
 
     var generateVictim = window.generateVictim = function() {
 	    var nyEnvelope = [mapBounds.getSouthWest().lat(), 
-	    									mapBounds.getSouthWest().lng(), 
-	    									mapBounds.getNorthEast().lat(), 
-	    									mapBounds.getNorthEast().lng()]
+							mapBounds.getSouthWest().lng(), 
+							mapBounds.getNorthEast().lat(), 
+							mapBounds.getNorthEast().lng()]
 
     	// get a random point inside the nyEnvelope, then check if it's within the nyBoroughs bounds
   		var point = [nyEnvelope[0] + (Math.random() * (nyEnvelope[2] - nyEnvelope[0])), 
@@ -116,11 +119,12 @@ function loadMaps(){
   		return generateVictim();
     }
 
-		google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
-		    mapBounds = this.getBounds();
-		    window.setTimeout(function() { generateVictim() }, 500 );
-		    //window.setInterval(function() { generateVictim() }, 3000 );
-		});
+	google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
+	    mapBounds = this.getBounds();
+	    $('.start').html("I'm ready. Start the game.");
+	    //window.setTimeout(function() { generateVictim() }, 500 );
+	    //window.setInterval(function() { generateVictim() }, 3000 );
+	});
 
 }
  

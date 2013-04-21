@@ -86,8 +86,21 @@ h4 {
 	border-radius: 5px;
 }
 
+#hospital-box {
+	color: white;
+	width: 200px;
+	font-size: 13px;
+	height: 312px;
+	overflow: scroll;
+}
+
+#hospital-box .alert {
+	margin-bottom: 10px;
+}
+
 a.start {
-	padding: 16px 150px;
+	padding: 16px 0px;
+	width: 540px;
 	cursor: pointer;
 
 	display: block;
