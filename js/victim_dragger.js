@@ -135,12 +135,14 @@ VictimDragger.createResult = function(name, success, hospital, speedRate, hospit
       $('#survived').find('.notif').html(html);
       $('#survived').find('.notif').fadeIn();
       setTimeout(function(){ $('#survived').find('.notif').fadeOut(); }, 2000); 
+      lives.play();
     } else {
       DECEASED++;
       $('.deceased').html(DECEASED);
       $('#deceased').find('.notif').html(html);
       $('#deceased').find('.notif').fadeIn();
       setTimeout(function(){ $('#deceased').find('.notif').fadeOut(); }, 2000); 
+      dies.play();
     }
 
     NEEDSHELP--;

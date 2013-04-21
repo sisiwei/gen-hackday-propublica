@@ -5,8 +5,8 @@ var TOTAL = 0,
 
 var map;
 
-var lives = new Audio(),
-	dies = new Audio();
+var lives = new Audio('sound/whew.wav'),
+	dies = new Audio('sound/doh-dead-needs.wav');
 
 $(document).ready(function(){
 	loadMaps();
