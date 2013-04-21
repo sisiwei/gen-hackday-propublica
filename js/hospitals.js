@@ -29,10 +29,10 @@ $(document).ready(function(){
 		}
 
 		window.setClear = function() {
-			window.clearInterval(window.game, levelLength)
+			window.clearInterval(window.game)
 		}
 
-		var fullGame = window.setInterval(function() {
+		window.fullGame = window.setInterval(function() {
 			if (curLevel < levels.length - 1) {
 				curLevel++
 				window.setClear();
@@ -42,8 +42,7 @@ $(document).ready(function(){
 				console.log('ending game');
 				window.setClear();
 				endGame();
-				// for starting over...
-				curLevel = 0;
+				window.clearInterval(window.fullGame);
 			}
 		}, fullGameLength)
 
