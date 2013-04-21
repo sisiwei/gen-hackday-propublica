@@ -2,14 +2,19 @@ var TOTAL = 0,
 	NEEDSHELP = 0,
 	SURVIVED = 0,
 	DECEASED = 0;
+
 var map;
+
+var lives = new Audio(),
+	dies = new Audio();
 
 $(document).ready(function(){
 	loadMaps();
 
 	// Handling the opening screen
 	$('.start').click(function(){
-		$('.instructions-background').add('.instructions').fadeOut();
+
+		$('.instructions-background').add('.black-panel').fadeOut();
 		// Start adding victims.
 		var levels   = [3000, 2000, 1000];
 		var curLevel = 0;
@@ -167,8 +172,9 @@ function generatePeople(number, color){
 
 function endGame(){
 	$('.instructions-background').fadeIn();
-	$('#final-saved').html(SURVIVED);
-	$('#final-total').html(TOTAL);
+	$('.final-saved').html(SURVIVED);
+	$('.final-total').html(TOTAL);
+	$('.final-needs-help').html(NEEDSHELP);
 
 	if (SURVIVED >= DECEASED){
 		$('.resolution-congrats').fadeIn();
