@@ -1,5 +1,7 @@
 var TOTAL = 0,
-	NEEDSHELP = 0;
+	NEEDSHELP = 0,
+	SURVIVED = 0,
+	DECEASED = 0;
 var map;
 
 $(document).ready(function(){

@@ -61,7 +61,7 @@ h4 {
 }
 
 .survival-counter {
-	padding: 15px;
+	padding: 15px 10px 15px 15px;
 }
 
 .survival-counter-background {
@@ -91,17 +91,54 @@ h4 {
 	border-radius: 5px;
 }
 
-#hospital-box {
-	color: white;
-	width: 200px;
-	font-size: 13px;
-	height: 312px;
-	overflow: auto;
-	overflow-x:hidden;
+.large-people {
+	width: 22px;
+	margin-right: 10px;
+	margin-top: 3px;
 }
 
-#hospital-box .alert {
-	margin-bottom: 10px;
+.notif {
+	color: white;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 10px;
+	width: 203px;
+	background-color: #202020;
+	height: 150px;
+}
+
+h5 {
+	color: white;
+	margin-bottom: 0px;
+}
+
+.nlabel {
+	font-size: 10px;
+	color: white;
+	padding: 10px 0px;
+	width: 70px;
+}
+
+#speed-score, #hospital-score {
+	color: white;
+	padding-right: 0px;
+	font-size: 12px;
+}
+
+#speed-score span, #hospital-score span {
+	border: 1px solid green;
+	border-radius: 5px;
+	padding: 6px;
+	background-color: rgb(88, 167, 88);
+}
+
+.notif table {
+	background: none;
+	border: none;
+}
+
+.notif table tr:nth-of-type(even) {
+	background: none;
 }
 
 a.start {
