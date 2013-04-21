@@ -81,7 +81,7 @@ function loadMaps(){
     var overlay = new google.maps.OverlayView();
 
     _(HOSPITALS).each(function(hospital) {
-    	if (hospital.heart_attack_mortality_rate) {
+    	if (hospital.hospital_rating_str) {
 			 	var marker = new google.maps.Marker({
 			  	position: new google.maps.LatLng(hospital.lat, hospital.lng),
 			  	map: map,
