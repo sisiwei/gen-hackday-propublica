@@ -3,6 +3,11 @@ h2 { margin-bottom: 0px; padding-right: 10px;}
 .clear { clear: both; }
 .person { width: 10px; }
 .padding-top { padding: 30px 0 0 0;}
+.logo {
+	position: relative;
+	top: 6px;
+	width: 38px;
+}
 
 .people-holders { min-height: 19px; width: 200px; }
 
@@ -37,8 +42,13 @@ h4 {
 	opacity: 0.8;
 }
 
-.resolution-sad, .resolution-congrats {
+/*  .resolution-congrats*/
+.instructions, .resolution-sad  {
 	display:none;
+}
+
+.black-panel.resolution-sad, .black-panel.resolution-congrats {
+	top: 60px;
 }
 
 .black-panel {
