@@ -1,6 +1,6 @@
 var VictimDragger = function(startCoords, map) {
   var that = this;
-
+  this.map = map;
   this.startCoords = startCoords;
   this.startTime = new Date().getTime();
   this.victimName = RANDOM_NAMES[Math.floor(Math.random()*RANDOM_NAMES.length)];
@@ -70,7 +70,10 @@ VictimDragger.prototype.dropSuccess = function(hospital) {
       " <br\/>where the heart attack mortality rate is " + hospital.heart_attack_mortality_rate + "%." +
       " It took " +  resp.routes[0].legs[0].duration.text + " to travel the " + resp.routes[0].legs[0].distance.text + "."
     , 3000)
-    console.log(resp); });
+    that.marker.setMap(null);
+    window.setTimeout(window.generateVictim, 3100);
+    console.log(resp); 
+  });
 }
 
 // Calculate travel times from any origin to destination
