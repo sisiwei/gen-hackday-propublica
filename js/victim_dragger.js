@@ -66,7 +66,7 @@ VictimDragger.prototype.dropSuccess = function(hospital) {
     // , 3000, "message")
 
     // Calcuate chance of survival. Which needs to move the individual from needshelp.
-    var success = false,
+    var success = true,
         speedRate = "Fast";
 
 
@@ -100,7 +100,7 @@ VictimDragger.createResult = function(name, success, hospital, speedRate, hospit
     "Above average": "ABOVE AVG."
   }
 
-  var html = '<h5>' + name + ' ' + displaySuccess(success) + '</h5> <table> <tr> <td class="nlabel">TRANSPORT SPEED:</td> <td id="speed-score"><span class="' + rateLookup[speedRate] + '">FAST</span></td> </tr> <tr> <td class="nlabel">HOSPITAL QUALITY:</td> <td id="hospital-score"><span class="' + rateLookup[hospitalRate] + '">' + displayText[hospitalRate] + '</span></td> </tr> </table>';
+  var html = '<h5>' + name + ' ' + displaySuccess(success) + '</h5> <table> <tr> <td class="nlabel">TRANSPORT SPEED:</td> <td id="speed-score"><span class="' + rateLookup[speedRate] + '">FAST</span></td> </tr> <tr> <td class="nlabel">HOSPITAL QUALITY:</td> <td id="hospital-score"><span class="' + rateLookup[hospitalRate] + '">' + displayText[hospitalRate] +  '</span></td> </tr> </table>';
 
   executeUpdates(success, html);
 
