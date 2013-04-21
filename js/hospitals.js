@@ -1,5 +1,4 @@
-var TOTAL = 0,
-	NEEDSHELP = 0,
+var NEEDSHELP = 0,
 	SURVIVED = 0,
 	DECEASED = 0;
 var map;
@@ -12,7 +11,15 @@ $(document).ready(function(){
 		$('.instructions-background').add('.instructions').fadeOut();
 		// Start adding victims.
 		generateVictim();
-		window.setInterval(function() { generateVictim() }, 3000 );
+
+		var game = setInterval(function(){ 
+			generateVictim();
+		}, 3000);
+
+		window.setTimeout(function(){
+			clearInterval(game);
+			endGame();
+		}, 30000);
 	})
 
 })
@@ -97,7 +104,6 @@ function loadMaps(){
     var boroughPolygons = []
     var nyBoroughs = new GeoJSON(NY_BOROUGHS, {fillColor : "#999999", fillOpacity: 0.25, strokeWeight: 1, map : map, strokeColor : "#999999" });
     for (var i = 0; i < nyBoroughs.length; i++) {
-    	//console.log(nyBoroughs[i]);
     	for (var j = 0; j < nyBoroughs[i].length; j++) {
     		console.log(nyBoroughs[i][j].error)
     		var feature = nyBoroughs[i][j];
@@ -127,8 +133,6 @@ function loadMaps(){
 	google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
 	    mapBounds = this.getBounds();
 	    $('.start').html("I'm ready. Start the game.");
-	    //window.setTimeout(function() { generateVictim() }, 500 );
-	    //window.setInterval(function() { generateVictim() }, 3000 );
 	});
 
 }
@@ -140,4 +144,9 @@ function generatePeople(number, color){
 		temp.push('<img class="person" src="img/person-' + color + '.png" />');
 	})
 	return temp.join('');
+}
+
+function endGame(){
+	$('.instructions-background').fadeIn();
+
 }

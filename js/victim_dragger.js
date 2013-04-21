@@ -79,18 +79,15 @@ VictimDragger.calculateDeath = function(hospital, totalTravelTime) {
 VictimDragger.prototype.dropSuccess = function(hospital) {
   var that = this;
   this.elapsedTime = ((new Date().getTime() - this.startTime) / 1000)/2;
-  //console.log(this.elapsedTime)
   this.travelTime(hospital, function(resp) {
 
     // Calcuate chance of survival. Which needs to move the individual from needshelp.
     var totalTravelTimeMinutes = ((that.elapsedTime + resp.routes[0].legs[0].duration.value) / 60)
-    //console.log(totalTravelTimeMinutes);
     var success = VictimDragger.calculateDeath(hospital, totalTravelTimeMinutes);
 
     // Displaying the result
     VictimDragger.createResult(that.victimName, success, hospital, totalTravelTimeMinutes, hospital.hospital_rating_str);
     that.marker.setMap(null);
-    //window.setTimeout(window.generateVictim, 3100);
     
   });
 };
@@ -163,8 +160,6 @@ VictimDragger.prototype.travelTime = function(hospital, cb){
   directionsService.route(request, function(result, status) {
     if (status == google.maps.DirectionsStatus.OK) {
       cb(result);
-      //console.log(result);
-      //directionsDisplay.setDirections(result);
     }
   });
 };
